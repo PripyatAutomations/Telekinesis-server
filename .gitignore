@@ -46,3 +46,4 @@ src/chan-sccp/*
 logs/*
 logs/asterisk/*
 .empty/*
+voices/*
