@@ -4,6 +4,7 @@ PREFIX := /opt/netrig
 db += data/rigs.db
 db += data/session.db
 db += data/users.db
+VOICES_REPO := https://github.com/PripyatAutomations/Telekinesis-voices.git
 
 all: help
 
@@ -53,6 +54,8 @@ help:
 	@echo "deps\t\tInstall dependencies (apt - root needed)"
 	@echo "install\t\tInstall into ${PREFIX}"
 
+download-voices:
+	git clone https://github.com/PripyatAutomations/Telekinesis-voices.git voices
 
 ##################
 # Database Tasks #
