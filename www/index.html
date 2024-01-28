@@ -1,0 +1,100 @@
+<!doctype html>
+<!--
+   -
+   - Greetings! Thanks for a taking a look!
+   -
+   - I've tried to keep this easy to customize
+   - by the way I've split up the HTML, CSS, and JS.
+   -
+   - Please feel free to make improvements, I'm a self-taught
+   - minimalist web developer. I'm sure someone could make
+   - this quite a lot fancier and more robust ;) This is just
+   - a fun experiment in HTML5 for me.
+  -->
+<html>
+ <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes, user-scalable=no"/>
+  <meta charset="utf-8">
+  <meta name="author" content="admin@istabpeople.com"/>
+  <meta name="description" content="Remote interface to a RadOS powered radio"/>
+  <link rel="stylesheet" media="screen" href="css/jquery-ui.min.css"/>
+  <link rel="stylesheet" media="screen" href="css/jquery-ui.theme.css"/>
+  <link rel="stylesheet" media="screen" href="css/jquery-ui.structure.min.css"/>
+  <link rel="stylesheet" media="screen" href="css/jquery.window.css"/>
+  <link rel="stylesheet" media="screen" href="css/toastr.min.css"/>
+  <link rel="stylesheet" media="screen" href="css/dark.css"/>
+  <link rel="stylesheet" media="screen" href="css/screen.css"/>
+  <link rel="stylesheet" media="screen" href="css/rig-dark.css"/>
+  <title>netrig Remote::Login</title>
+ </head>
+ <body>
+  <div id="logout_confirm" title="Confirm logout?">
+  Please confirm logout request
+  </div>
+  <div id="logout">Logout</div>
+  <div id="goBack" href="/">Go Back</div>
+  <div id="loading">
+   <div id="loadingModal">
+    <noscript>
+     <style>.jsonly { display: none; }</style>
+    <center><h1>ERROR!</h1></center>
+    It appears JavaScript is disabled in your browser.<br/>Please enable it to proceed.
+    </noscript>
+    <center class="jsonly"><h1>Loading...</h1></center>
+    <div class="jsonly">Please wait while your page loads.</div>
+   </div> <!-- loadingModal -->
+  </div> <!-- loading -->
+  <div id="offline">
+   You are currently not connected to a radio.<br/>
+   <a id="connect">Click here</a> to login.<br/>
+  </div>
+  <!-- Login Dialog -->
+  <div id="Login">
+  </div> <!-- Login -->
+  <div id="LoginModal">
+  <center>
+   <h3>netrig remote</h3>
+   <h4>Authentication Required</h4>
+  </center>
+  <fieldset name="login" action="" method="post">
+   <form name="login" id="login">
+    Listen Only: &nbsp;&nbsp;<a id="guestlogin">guest</a> [<span class="hashpass"><span class="hashpass_char" style="background-color: #16D38E"></span><span class="hashpass_char" style="background-color: #7C623D"></span><span class="hashpass_char" style="background-color: #83AA5B"></span></span>]<br/>
+    <label for="callsign">Callsign</label><br/>
+    <input name="callsign" id="callsign"/><br/>
+    <label for="pass">Password</label><br/>
+    <input name="pass" id="pass" type="password"/><br/>
+    Multitasking Mode:<br/>
+    <input name="winmode" id="WindowModeTabbed" type="radio" value="tabbed" disabled/>Tabbed<br/>
+    <input name="winmode" id="WindowModeWindows" type="radio" value="windowed" checked/>Windowed</br>
+    <input id="submit" type="submit" value="Login"/>
+    <input id="reset" type="reset" value="Clear"/>
+   </form>
+  </fieldset>
+  <center>
+   <font style="font-size: 0.7em">
+    <a href="javascript:TotalCleanup();">Click here</a> to clear localStorage
+    <hr width="50%"/>
+    BUGS:
+    [<a href="/cgi-bin/bugs.pl">KNOWN</a>]&nbsp;||
+    [<a href="/bugreport.html">REPORT</a>]
+   </font>
+  </center>
+  </div> <!-- LoginModal -->
+  <script src="js/jquery.min.js"></script>
+  <script src="js/loader.js"></script>
+  <script src="js/jquery-ui.min.js"></script>
+  <script src="js/jssip-3.10.0.min.js"></script>
+  <script src="js/toastr.min.js"></script>
+  <script src="js/escapes.min.js"></script>
+  <script src="js/handlebars.js"></script>
+  <script src="js/jquery.chroma-hash.js"></script>
+  <script src="js/ResizeObserver.js"></script>
+  <script src="js/netrig.js"></script>
+  <script src="js/netrig-radio.js"></script>
+  <script src="js/netrig-menu.js"></script>
+  <script src="js/planetaryjs.min.js"></script>
+  <script src="js/windowing.js"></script>
+  <!-- Here we define 'special' tags which are used for navigation, etc -->
+  <script src="js/customtags.js"></script>
+ </body>
+<//html>

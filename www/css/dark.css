@@ -1,0 +1,65 @@
+/* Some default styles while the loader does it's thing */
+html, body {
+   background: #0c0c0c;
+   color: #c0c0c0;
+   padding: 0px;
+   margin: 0px;
+}
+a, a:visited, a:active {
+  color: #7070a0;
+  text-decoration: underline;
+}
+a:hover {
+  text-decoration: italic, underline;
+}
+progress {
+}
+progress:not([value]) {
+}
+div#loadingsplash, div#noscript {
+  background: black;
+  color: #f00000;
+  border: 2px solid #f00000;
+  margin: 10px;
+  padding: 10px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  height: CALC(100% - 40px);
+  width: CALC(100% - 40px);
+  z-index: 10000;
+}
+div#loading {
+  color: red;
+  text-align: center;
+  border: 2px solid #f00000;
+  padding: 10px;
+  position: absolute;
+  left: 30%;
+  top: 30%;
+  width: 40%;
+  height: 5em;
+}
+
+div.window {
+  background: black;
+  margin: 0px;
+  padding: 10px;
+  position: absolute;
+  color: #c0c0c0;
+  text-align: center;
+  border: 2px solid green;
+  padding: 0px;
+  left: 2px;
+  top: 2px;
+  width: CALC(100% - 4px);
+  height: CALC(100% - 4px);;
+}
+
+viewref {
+   text-decoration: underline;
+}
+
+viewref:hover {
+   cursor: pointer;
+}

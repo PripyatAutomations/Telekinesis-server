@@ -1,0 +1,143 @@
+#!/bin/bash
+######
+# Here we startup an Xvnc instance, put flrig into it
+# and make it accessible via http, if desired.
+#
+. /opt/netrig/lib/config.sh
+
+RADIO_NAME=radio0
+
+function start_vnc() {
+    # Generate a new fairly secure password. This wont contain special symbols to make easier to type...
+    if [ ! -f /opt/netrig/etc/flrig-vnc.pass ]; then
+       NEW_PASSWD="$(dd if=/dev/urandom bs=1 count=100 2>/dev/null | tr -dc _A-Z-a-z-0-9 | base64 -w 0 | rev | cut -c 3-19)"
+       echo "${NEW_PASSWD}" > /opt/netrig/run/flrig-vnc.pass.raw
+    else
+       NEW_PASSWD="$(cat /opt/netrig/etc/flrig-vnc.pass)"
+    fi
+    echo "${NEW_PASSWD}" | vncpasswd -f 2>/dev/null > /opt/netrig/run/flrig-vnc.pass
+
+    echo "- Launching Xvnc server on port ${RFB_PORT}"
+    Xvnc :${RFB_DISPLAY} \
+            -geometry ${FLRIG_SZ} \
+            -depth ${BPP} \
+            -desktop "${RADIO_NAME}-flrig" \
+            -rfbport ${RFB_PORT} \
+            -rfbauth /opt/netrig/run/flrig-vnc.pass \
+            -alwaysshared \
+            -dontdisconnect \
+            -nolock \
+            -nolisten tcp \
+            -dpi ${DPI} \
+            nologo -nopn ${LOCAL_ONLY} &
+    VNC_PID=$!
+    echo "${VNC_PID}" > /opt/netrig/run/flrig-vnc.pid
+
+    echo "*** DISPLAY ${DISPLAY} ***"
+    export DISPLAY=:${RFB_DISPLAY}
+
+    #####################
+    # flrig and rigcltd #
+    #####################
+    flrig </dev/null 2>&1 &
+    sleep 5
+    rigctld  -m 4 -P RIG -t 4532 </dev/null 2>&1 &
+    xdotool search 'flrig' windowmove 0 0
+
+    ####### sorta optional - move flrig window to 0,0 ####
+    [ ! -z "$WM" ] && $WM &
+
+    ######################
+    # Enable noVNC html5 #
+    ######################
+    if [ ! -z "${LOCAL_ONLY}" ]; then
+            /opt/netrig/ext/noVNC/utils/novnc_proxy --vnc localhost:${RFB_PORT} --listen localhost:${HTML_PORT} &
+            PROXY_PID=$!
+            echo "${PROXY_PID}" > /opt/netrig/run/flrig-vnc-proxy.pid
+            echo "novnc proxy is running at port localhost:6081 (PID: ${PROXY_PID})"
+    else
+            /opt/netrig/ext/noVNC/utils/novnc_proxy --vnc localhost:${RFB_PORT} --listen ${HTML_PORT} &
+            PROXY_PID=$!
+            echo "${PROXY_PID}" > /opt/netrig/run/flrig-vnc-proxy.pid
+            echo "novnc proxy is running at port localhost:6081  (PID: ${PROXY_PID})"
+    fi
+
+    echo "**********************"
+    echo "* flrig-vnc  running *"
+    echo "**********************"
+    echo ""
+    echo "You should be able to access flrig on the following ports/URLS:"
+    echo -e "\tX11	  export DISPLAY=\"${DISPLAY}\""
+    echo -e "\tHTTP - http://${HOST}:${HTML_PORT}/vnc.html"
+    echo -e "\tVNC    vnc://${HOST}:${RFB_PORT}  ( Port ${RFB_PORT} )"
+
+    [ ! -z "${LOCAL_ONLY}" ] && echo -e "* Access is allowed ONLY from localhost (127.0.0.1)*"
+    echo -e "Your session password is ${NEW_PASSWD}"
+}
+
+function stop_vnc() {
+    [ ! -f /tmp/flrig-vnc.pid ] && {
+       echo "* Cannot find pid file /tmp/flrig-vnc.pid, try manually killing it:"
+    }
+    echo "* Killing noVNC service'"
+    ps auwwx|grep noVNC|grep -v grep|awk '{ print $2 }'|xargs kill -9
+
+    VNC_PID=$(cat /tmp/flrig-vnc.pid)
+    kill -TERM ${VNC_PID}
+    sleep 3
+    kill -KILL ${VNC_PID}
+
+    echo "* Killed ${VNC_PID}"
+
+    # XXX: Probably shouldnt just kill all the novnc_proxy
+    killall -TERM flrig rigctld novnc_proxy
+    sleep 2
+
+    # BUG: See above re: killing novnc_proxy
+    killall -KILL flrig rigcltd novnc_proxy
+
+    [ -f /opt/netrig/run/flrig-vnc.pid ] && {
+            VNC_PID=$(cat /opt/netrig/run/flrig-vnc.pid)
+            rm /opt/netrig/run/flrig-vnc.pid
+            kill -9 ${VNC_PID}
+            unset VNC_PID
+    }
+
+    [ -f /opt/netrig/run/flrig-vnc-proxy.pid ] && {
+            PROXY_PID=$(cat /opt/netrig/run/flrig-vnc-proxy.pid)
+            rm /opt/netrig/run/flrig-vnc-proxy.pid
+            kill -9 ${PROXY_PID}
+            unset PROXY_PID
+    }
+}
+
+function vnc_status() {
+    [ -f /opt/netrig/run/flrig-vnc-proxy.pid ] && {
+            PROXY_PID=$(cat /opt/netrig/run/flrig-vnc-proxy.pid)
+	echo "* Running at ${PROXY_PID}"
+    }
+    [ -z "${PROXY_PID}" ] && echo "* Not running"
+}
+
+ACT=$1
+
+[ -z "${ACT}" ] && ACT=status
+
+case ${ACT} in
+	restart)
+		stop_vnc
+		start_vnc
+		;;
+	start)
+		start_vnc
+		;;
+	stop)
+		stop_vnc
+		;;
+	status)
+		vnc_status
+		;;
+	*)
+		echo "* Invalid command. Choices: start|stop|restart|status"
+		;;
+esac

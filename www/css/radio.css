@@ -1,0 +1,369 @@
+/* Split-screen interface */
+div#PaneLeft, div#PaneRight {
+    position: fixed;
+    top: 0px;
+    height: CALC(100% - 4px);
+    width: CALC(50% - 6px);
+}
+
+/* Initial position is split 50%/50% minus padding */
+div#PaneLeft {
+    left: 1px;
+}
+
+div#PaneRight {
+    left: CALC(50% + 5px);
+}
+
+
+a:hover, input:hover {
+   outline: none !important;
+   border-color: red;
+   box-shadow: 0 0 10px red;
+}
+
+form#CAT {
+}
+
+/* Left side drop-down settings */
+div#CAT_mode, div#CAT_band, div#CAT_step, div#CAT_agc {
+    position: fixed;
+    border-radius: 8px;
+    text-align: center;
+    color: white;
+    margin-bottom: 5px;
+    height: 3.25em;
+    left: 1px;
+}
+
+div#CAT_band {
+    border: 1px solid #08cc08;
+    background: #084c08;
+    width: 6.5em;
+    padding-bottom: 5px;
+    top: 1px;
+}
+
+div#CAT_mode {
+    border: 1px solid #9c0808;
+    background: #4c0808;
+    width: 6.5em;
+    padding-bottom: 5px;
+    top: 4em;
+}
+div#CAT_step {
+    border: 1px solid #08089c;
+    background: #08084c;
+    width: 6.5em;
+    padding-bottom: 5px;
+    top: 8em;
+}
+div#CAT_agc {
+    border: 1px solid #a8a8a8;
+    background: #ff9500;
+    width: 6.5em;
+    padding-bottom: 5px;
+    top: 12em;
+}
+
+
+div#TabStrip_A {
+    position: absolute;
+    top: 0.5em;
+    left: 22em;
+    height: CALC(100% - 0.7em);
+    width: CALC(100% - 22.5em);
+    border: 1px solid grey;
+    border-radius: 8px;
+}
+
+
+div.TabBar {
+    background: #101010;
+    border-radius: 8px 8px 0px 0px;
+    padding-left: 1em;
+    color: white;
+}
+
+div.TabBar a {
+    color: white;
+    text-decoration: none;
+}
+
+span.Tab {
+    cursor: pointer;
+    cursor: hand;
+    background: #5c5c5c;
+    border: 1px solid #1c1c1c;
+    border-radius: 8px 8px 0px 0px;
+    padding: 0em 0.5em 0em 1em;
+}
+
+span.Tab:hover {
+   outline: none !important;
+   border-color: red;
+   box-shadow: 0 0 10px red;
+}
+
+.ActiveTab {
+    background: #c0c0c0;
+    border: 1px solid #5c5c5c;
+    color: red;
+}
+/* Status stuff */
+div#statusLights {
+    top: 5.4em;
+    border: 2px solid #4f4040;
+    border-radius: 8px;
+    font-size: 1.3em;
+    width: CALC(10em - 8px);
+    padding: 0.2em;
+    position: fixed;
+    left: 6.1em;
+    height: 1.2em;
+}
+
+.stat_bt {
+   border: 1px solid #c0c0c0;
+   border-radius: 10px;
+   color: white;
+   background: #0f0f0f;
+   padding: 0px 3px 0px 3px;
+   margin: 0px 0px 0px 0px;
+   font-size: 0.9em;
+}
+
+.stat_ACTIVE {
+    color: green;
+    border: 1px solid green;
+}
+
+.stat_ACTIVE_TX {
+    color: red;
+    border: 1px solid red;
+}
+
+.stat_AGC_OFF, .stat_AGC_SLOW, .stat_AGC_MED, .stat_AGC_FAST {
+   border-radius: 10px;
+   background: #0f0f0f;
+   padding: 0px 3px 0px 3px;
+   margin: 0px 0px 0px 0px;
+   font-size: 0.9em;
+}
+
+.stat_AGC_OFF {
+   color: white;
+   border: 1px solid #c0c0c0;
+}
+
+.stat_AGC_SLOW {
+   color: red;
+   border: 1px solid red;
+}
+
+.stat_AGC_MED {
+   color: orange;
+   border: 1px solid orange;
+}
+
+.stat_AGC_FAST {
+   color: green;
+   border: 1px solid green;
+}
+
+div#View_Waterfall, div#View_Decoder, div#View_FileXFER {
+    display: none;
+}
+
+div#View_Waterfall {
+    display: none;
+    margin: 3px;
+}
+
+div#View_Decoder {
+}
+
+div#view_FileXFER {
+}
+
+/* CW mode */
+div#CW_Text {
+   border: 1px solid #1c1c1c;
+   border-radius: 8px 8px 0px 0px;
+   position: relative;
+   top: 3px;
+   left: 2px;
+   height: 22em;
+   width: CALC(100% - 6px);
+}
+
+div#CW_Text:focus {
+   outline: none !important;
+   border-color: red;
+   box-shadow: 0 0 10px red;
+}
+
+div#CW_Text:hover, div#CW_Text:focus, div#CW_Text:active {
+   outline: none !important;
+   border-color: red;
+   box-shadow: 0 0 10px red;
+}
+
+#CW_Input input[type=text] {
+   border-radius: 8px;
+   background-color: #0c0c0c;
+   color: white;
+}
+
+input#CW_Send {
+   border-radius: 10px;
+   font-size: 1.2em;
+   position: relative;
+   top: 0px;
+   right: -0.6em;
+   margin: 0px 0px 0px 0px;
+}
+
+div#CW_Input {
+   border-radius: 8px;
+   position: relative;
+   height: 2em;
+   width: CALC(100%);
+   padding-bottom: 0px;
+   margin-bottom: 0px;
+   top: 12px;
+   left: 0px;
+}
+
+input#CW_Input {
+   font-size: 1.2em;
+   width: CALC(100% - 4.8em);
+}
+
+input#CW_Input:focus, input#CW_Input:hover, input#CW_Input:active {
+   outline: none !important;
+   border-color: red;
+   box-shadow: 0 0 10px red;
+}
+
+input#CW_Send:focus, input#CW_Send:hover {
+   outline: none !important;
+   border-color: red;
+   box-shadow: 0 0 10px red;
+}
+
+div#CW_Macro {
+   position: relative;
+   left: 1px;
+   top: 0.9em;
+   height: CALC(100% - 1em);
+   width: CALC(100% - 4px);
+   padding: 5px 5px 5px 5px;
+   margin-top: 5px;
+}
+
+div#TabStrip_B {
+   position: fixed;
+   top: 20.5em;
+   left: 1px;
+   width: 21.5em;
+   height: CALC(50%);
+}
+
+div#View_Settings, div#View_Memories {
+   border: 1px solid #1c1c1c;
+   border-radius: 0px 0px 8px 8px;
+   height: CALC(93% - 5px);
+   display: none;
+   margin: 5px 5px 5px 5px;
+}
+
+div#Menu_Settings {
+}
+
+/* Memory Manager */
+div#Menu_Memories {
+   display: none;
+}
+
+div#Tuning {
+   border: 1px solid #1c1c1c;
+   background: #12101a;
+   border-radius: 8px;
+   position: fixed;
+   top: 10em;
+   left: 9.25em;
+   width: 11em;
+   height: 10em;
+}
+
+img#TuningKnob {
+   position: relative;
+   left: 1em;
+   top: 0.5em;
+   height: 9em;
+}
+
+/***************************************/
+/* This is from w3schools.com - https://www.w3schools.com/howto/howto_custom_select.asp */
+/* The container must be positioned relative: */
+/***************************************/
+.custom-select {
+  position: relative;
+  font-family: Arial;
+}
+
+.custom-select select {
+  display: none; /*hide original SELECT element: */
+}
+
+.select-selected {
+  background-color: DodgerBlue;
+}
+
+/* Style the arrow inside the select element: */
+.select-selected:after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+
+/* Point the arrow upwards when the select box is open (active): */
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent #fff transparent;
+  top: 7px;
+}
+
+/* style the items (options), including the selected item: */
+.select-items div,.select-selected {
+  color: #ffffff;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+  cursor: pointer;
+}
+
+/* Style items (options): */
+.select-items {
+  position: absolute;
+  background-color: DodgerBlue;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+
+/* Hide the items when the select box is closed: */
+.select-hide {
+  display: none;
+}
+
+.select-items div:hover, .same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+

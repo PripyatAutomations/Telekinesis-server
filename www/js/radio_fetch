@@ -1,0 +1,28 @@
+   let rc = $.ajax({
+       url: 'data/menu_main.json',
+       cache: false,
+       type: "GET",
+       dataType: 'json',
+       // Pass along our AuthCookie, in case this is a private instance
+       data: JSON.stringify({ "AuthCookie": Session.getItem('AuthCookie') }),
+       success: function(result) {
+          if (result.Status == "FAILURE") {
+             // Determine the login failure cause and display an appropriate error
+             if (result.Message)
+                toastr.error('LoadMenu(' + Menu.Name + ') failed: ' + result.Messsage);
+             else
+                toastr.error('GetRadios failed: Unknown error. Contact radio admin for assistance.');
+
+             $('div#main_menu').fadeIn("fast");
+          } else {
+             let myMenu = menu_parse_json(result.Menu);
+             menu_init_gui(myMenu);
+             console.log("Succesfully refreshed data/menu_main.json!");
+          }
+       },
+       error: function(xhr, resp, data) {
+          console.log("ERROR: resp=" + resp + ", data=" + data)
+          $('div#main_menu').fadeIn("fast");
+          toastr.error("GetRadios failed: Error connecting to remote server. Try again in a minute.");
+       }
+   });

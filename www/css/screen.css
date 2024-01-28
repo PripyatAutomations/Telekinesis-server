@@ -1,0 +1,386 @@
+/* by defauilt, disable selection as it leads to display glitches */
+* {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+html, body {
+   background-color: black;
+   color: #c0c0c0;
+   font-family:"Roboto", Arial, sans-serif;
+   padding: 5px;
+   /* by defauilt, disable selection as it leads to display glitches */
+   -webkit-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+}
+
+/* Allow selection within an element */
+.selectable {
+   -webkit-user-select: auto;
+   -moz-user-select: auto;  
+   -ms-user-select: auto;     
+   user-select: auto;
+}
+
+h1, h2, h3, h4, h5 {
+   color: #e9dcec;
+   padding: 0em;
+   margin: 0em;
+}
+
+h3 {
+   font-size: 1.2em;
+   text-decoration: underline #e9dcec;
+}
+
+h4 {
+   font-size: 1.1em;
+}
+
+input:disabled {
+   cursor: pointer;
+   background-color: #af3030;
+   background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(.5, rgba(255, 255, 255, .2)), color-stop(.5, transparent), to(transparent));
+   background-image: -moz-linear-gradient(rgba(255, 255, 255, .2) 50%, transparent 50%, transparent);
+   background-image: -o-linear-gradient(rgba(255, 255, 255, .2) 50%, transparent 50%, transparent);
+   background-image: linear-gradient(rgba(255, 255, 255, .2) 50%, transparent 50%, transparent);
+}
+
+button, input[type=button], input, input[type=text], input[type=email], input[type=password], select, textarea, .contenteditable {
+   background-color: /*#2f2f2f*/ black;
+   color: #f0f0f0;
+   -webkit-touch-callout:default;
+   -webkit-user-select:text;
+   -moz-user-select:text;
+   -ms-user-select:text;
+   user-select:text;
+   -webkit-user-select: auto;
+   -moz-user-select: auto;  
+   -ms-user-select: auto;     
+   user-select: auto;
+}
+
+button:hover, input[type=button]:hover, input:hover, input[type=text]:hover, input[type=email]:hover, input[type=password]:hover, select:hover, textarea, .contenteditable, a.guest_login {
+   cursor: hand;
+}
+
+button, input[type=button] {
+   text-align: center;
+}
+
+input[type=radio] {
+   accent-color: rgb(128, 0, 0);
+   background-color: reBd;
+   border-color: red;
+   box-shadow: 0 0 10px #990000;
+}
+
+input[type=radio]:checked {
+   color: red;
+}
+
+input[type=radio]:hover {
+   accent-color: rgb(255, 0, 0);
+   border-color: red;
+   box-shadow: 0 0 20px #aa0000;
+}
+
+button:focus, input:focus, textarea:focus, select:focus {
+   border-color: #990000;
+   box-shadow: 0 0 8px #990000;
+   outline: none !important;
+   outline-width: 0;
+}
+
+button:hover, input:hover, textarea:hover, select:hover {
+   background-color: #190000;
+   border-color: red;
+   box-shadow: 0 0 15px red;
+}
+
+select {
+   font-weight: bold;
+}
+
+a, a:visited, a:active {
+   text-decoration: none;
+   color: #0f0fc0;
+}
+
+a:hover {
+   text-decoration: underline;
+}
+
+/* This essentially is just a blur screen */
+div#loading {
+   position: fixed; left: 0px; top: 0px;
+   width: 100%; height: 100vh; overflow: hidden;
+   max-scale: 1.0; initial-scale: 1.0;
+   max-height: 100%; max-width: 100%;
+   backdrop-filter: blur(8px);
+   z-index: 5000;
+}
+
+div#loadingModal {
+    background-color: #a00808;
+    color: #f0f0f0;
+    /* Center the content... */
+    position: absolute; left: 50%; top: 0%; transform: translate(-50%, 50%);
+    font-size: 1.2em;
+    padding: 1em;
+    border: 2px solid grey;
+    z-index: 10000;
+}
+
+div#offline {
+    display: none;
+    border: 2px solid red;
+    background: red;
+    color: white;
+    overflow: hidden;
+    top: 0px;
+    left: 0px;
+    max-scale: 1.0; initial-scale: 1.0;
+    max-height: 100%; max-width: 100%;
+    height: 98%;
+    width: 99%;
+    position: absolute;
+}
+
+/*
+ * Login dialog
+ */
+div#Login {
+   display: none;
+/*   position: fixed; left: 0px; top: 0px;
+   width: 100%; height: CALC(100% - 2em); overflow: hidden;
+   max-scale: 1.0; initial-scale: 1.0;
+   max-height: 100%; max-width: 100%;
+*/
+   max-width: 50%;
+   z-index: 90000;
+}
+
+fieldset {
+    border: 2px solid red;
+}
+
+div#LoginModal {
+    display: none;
+    border: 2px solid red; 
+    color: #bcbcbc;
+    background-color: #3f0f0f; 
+    /* Center the content... */
+    width: 10em;
+/*    position: absolute; left: 50%; top: 0%; transform: translate(-50%, 50%);*/ 
+/*
+    position: absolute;
+    left: 1em;
+    top: 1em;
+    height: CALC(100% - 2em);
+    width: CALC(100% - 3em);
+*/
+    font-size: 1.5em;
+    padding: 0.25em;
+    z-index: 90000;
+}
+
+div#LoginModal label, div#LoginModal fieldset {
+   font-size: 0.8em;
+   background-color: #1f1f1f;
+}
+
+input[type=submit], input[type=reset] {
+   margin-top: 1em;
+}
+
+ul {
+   padding: 0px 0px 0px 20px;
+   margin: 0px 0px 0px 0px;
+}
+
+li {
+   padding: 0px 0px 0px px;
+}
+
+a:visited, a:active, a {
+   color: darkcyan;
+}
+
+/* Auto select countdown */
+span#auto_submit_countdown {
+    border: 2px solid red;
+    left: 2em; 
+    position: relative;
+    padding: 2px;
+    padding-top: 0px;
+    top: 6px;
+    width: CALC(100% - 2em);
+    display: none;
+}
+
+/* Logout button in top right */
+div#logout {
+   display: none;
+   font-size: 1.4em;
+   font-weight: bold;
+   color: red;
+   background-color: #300000;
+   z-index: 50;
+   padding: 0.2em;
+   position: fixed;
+   bottom: 0.5em;
+   right: 0.5em;
+   border: 2px solid #c00000;
+   border-radius: 10px;
+}
+
+div#logout:hover {
+   outline: none !important;
+   border-color: red;
+   box-shadow: 0 0 20px red;
+}
+
+div#logout_confirm {
+   display: none;
+}
+
+input:hover {
+   outline: none !important;
+   border-color: red;
+   box-shadow: 0 0 10px red;
+}
+
+/* Logout button in top right */
+div#goBack {
+   display: none;
+   font-size: 1.4em;
+   font-weight: bold;
+   color: green;
+   background-color: #003000;
+   z-index: 100;
+   padding: 0.2em;
+   position: fixed;
+   bottom: 0.5em;
+   left: 0.5em;
+   border: 2px solid #00c000;
+   border-radius: 10px;
+}
+
+div#goBack:hover {
+   outline: none !important;
+   border-color: green;
+   box-shadow: 0 0 10px green;
+}
+
+span.hashpass {
+   margin: 0px;
+   padding: 0px;
+   font-family: sans-serif, "Helvetica Neue", "Lucida Grande", Arial;
+}
+
+span.hashpass_char {
+   font-size: 20px;
+   font-stretch: expanded;
+}
+
+span.hashpass_char:empty:before {
+  content: "\00a0";
+}
+
+/*******************
+ * main menu stuff *
+ *******************/
+div.menu {
+   position: fixed; left: 0px; top: 0px;
+   width: 100%; height: 99%; overflow: hidden;
+   max-scale: 1.0; initial-scale: 1.0;
+   max-height: 100%; max-width: 100%;
+   background-color: black;
+   border: none;
+}
+
+div.menu fieldset {
+   background-color: #a00800;
+}
+
+div.menu_modal {
+/*     background-color: #a00808; */
+    background-color: black;
+    color: #f0f0f0;
+    /* Center the content... */
+/*
+    position: absolute; left: 50%; top: 0%; transform: translate(-50%, 50%);
+*/
+    position: asolute;
+    left: 1em;
+    top: 1em;
+/*    width: CALC(100% - 2em);
+    height: CALC(100% - 2em); */
+    font-size: 1.2em;
+    padding: 1em;
+    border: 2px solid grey;
+}
+
+
+/* FREQUENCY tag support */
+/***************************************/
+frequency {
+   border: 2px solid blue;
+   margin-top: 8px;
+   font-size: 1.2em;
+   width: 9em;
+   z-index: 10000000000;
+   border-radius: 8px;
+   background: #0f0f0f;
+   padding-left: 5px;
+   padding-bottom: 5px;
+   position: floating;
+}
+
+span.frequency_edit, span.frequency_display {
+   width: 8em;
+   height: 2em;
+   display: block;
+   cursor: pointer;
+   margin-left: 10px;
+}
+
+span.frequency_edit {
+   border: 2px solid green;
+   background: orange;
+}
+
+span.frequency_display {
+  border: 1px solid orange;
+  background: #b0b0b0;
+}
+
+frequency:hover {
+   outline: none !important;
+   border-color: red;
+   box-shadow: 0 0 10px red;
+}
+
+div#vfo_a frequency {
+    top: 0.3em;
+    left: 4em;
+}
+
+div#vfo_b frequency {
+    top: 2.4em;
+    left: 4em;
+}
+
+.VFO {
+}
+
+.ActiveVFO {
+    background: #1f1f1f;
+    border: 2px solid green;
+}

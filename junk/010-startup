@@ -1,0 +1,15 @@
+#!/bin/bash
+#cd /opt/netrig/logs/
+#echo "* Starting flrig-vnc"
+#sudo -u ${NETRIG_HOST_USER} '/opt/netrig/init/flrig-vnc.start'
+
+#echo "* Starting pipewire, if needed"
+#MYPID=$(pidof pipewire)
+#[ "x${MYPID}" != "x" ] && kill -9 ${MYPID}
+#pipewire 2>&1 > /opt/netrig/log/pipewire.log &
+
+#echo "* Starting flrig-vnc"
+#sudo -u ${NETRIG_HOST_USER} '/opt/netrig/init/flrig-vnc.start'
+
+echo "* Starting PAT winlink client"
+sudo -u ${NETRIG_HOST_USER} pat-winlink http &

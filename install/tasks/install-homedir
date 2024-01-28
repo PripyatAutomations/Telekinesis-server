@@ -1,0 +1,4 @@
+#!/bin/bash
+. /opt/netrig/lib/config.sh
+
+cp -advrx /opt/netrig/install/UserDir ~${NETRIG_HOST_USER}/

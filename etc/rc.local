@@ -1,0 +1,16 @@
+#!/bin/bash
+if [ ! -z "$1" ]; then
+   ACT="$1"
+else
+   ACT="start"
+fi
+
+for i in /opt/netrig/init.d/*; do
+   bname=$(basename $i)
+   if [ -x $i ]; then
+      echo "* Starting $bname"
+      /bin/bash $i $ACT
+   else
+      echo "* Skipping $bname: not executable"
+   fi
+done

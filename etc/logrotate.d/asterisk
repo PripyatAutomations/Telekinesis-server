@@ -1,0 +1,13 @@
+/opt/netrig/var/log/asterisk/*.log /opt/netrig/var/log/asterisk/queue_log /opt/netrig/var/log/asterisk/mmlog {
+	weekly
+	missingok
+	rotate 52
+	compress
+	delaycompress
+	notifempty
+	create 640 root root
+	sharedscripts
+	postrotate
+		/opt/netrig/sbin/asterisk -rx 'logger reload' > /dev/null 2> /dev/null
+	endscript
+}

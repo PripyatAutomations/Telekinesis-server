@@ -1,0 +1,5 @@
+* Make the js side wait a brief bit before connecting (setTimeout ..)
+* Add auto-reconnect
+* Add disconnect button
+* cgi-bin has hardcode passwords!
+* genconf/baresip-backend.pl hardcoded hostname

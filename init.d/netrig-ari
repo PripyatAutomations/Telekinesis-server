@@ -1,0 +1,10 @@
+#!/bin/bash
+. /opt/netrig/lib/config.sh
+
+RADIO="radio0"
+
+while true; do
+   echo "[$(date +%Y-%m-%d.%H%M%S)] (re)starting..." >> /opt/netrig/logs/netrig-ari.${RADIO}.log
+   /opt/netrig/ari-bin/netrig-ssb-ari.pl ${RADIO}
+   sleep 15
+done
